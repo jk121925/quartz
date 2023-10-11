@@ -70,3 +70,6 @@ Action Space는 현재 환경에서 Agent가 Action할 수 있는 모든 Set을 
 $$ R(\tau) = r_{t+1} + r_{t+2} +r_{t+3} + r_{t+4} + r_{t+5} + ... $$
 $$ R(\tau) = \sum_{k=0}^\infty r_{t+k+1} $$
 ... 추후작성
+
+https://colab.research.google.com/github/huggingface/deep-rl-class/blob/master/notebooks/unit1/unit1.ipynb#scrollTo=PAEVwK-aahfx
+

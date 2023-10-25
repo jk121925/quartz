@@ -5,6 +5,7 @@
 # Value Function의 2가지 방법
 
 * 우선 lr는 감가된 모든 reward에 대해서 최대값을 찾는 것으로 정의 한다.
+
 $$ v_{\pi}(s) = E_{\pi}[R_{t+1} + {\gamma}R_{t+2} + {\gamma}^2R_{t+2}+ ... | S_t=s]  $$
 
 >[!summary]
@@ -40,10 +41,11 @@ $$ v_{\pi}(s) = E_{\pi}[R_{t+1} + {\gamma}R_{t+2} + {\gamma}^2R_{t+2}+ ... | S_t
 >[!summary]
 >### action-value function
 >action-value function은 아래와 같이 정의된다.
+>
 >$$\Huge Q_{\pi}(s,a) = E_{\pi}[G_t|S_t = s, A_t = a] $$
 >
-state-value function과 비슷하지만 action에 대한 정보가 더 들어가게 되는 것이다
-![[Pasted image 20231025201553.png]]
+> state-value function과 비슷하지만 action에 대한 정보가 더 들어가게 되는 것이다
+> ![[Pasted image 20231025201553.png]]
 
 
 --- 
@@ -93,10 +95,10 @@ Learning rate 이 alpha가 되면 현재 value(V)를 업데이트하기 위해�
 >[!example]
 >예제를 들어서 생각해보면
 > 전제 조건
->> 초기 value는 모두 0
->> learning rate := 0.1 -> 시간이 지날 수록 0.1씩 감소
->> 생쥐는 랜덤으로 움직인다.
->> 10번 움직이면 종료 혹은 고양이를 만나면 종료
+>1.  초기 value는 모두 0
+>2. learning rate := 0.1 -> 시간이 지날 수록 0.1씩 감소
+>3. 생쥐는 랜덤으로 움직인다.
+>4. 10번 움직이면 종료 혹은 고양이를 만나면 종료
 >
 >이때 위 그림과 같이 움직였다면
 >G0 = 1+0+0+0+0+0+1+1+0+0 = 3
@@ -110,7 +112,10 @@ Learning rate 이 alpha가 되면 현재 value(V)를 업데이트하기 위해�
 
 이걸 여기는 bootstrapping이라고 한다. <- 전체 episode의 값이 아니라 추정하기 때문이다.
 수식은 아래와 같다.
+
 $$\Huge V(S_t) \leftarrow V(S_t) + \alpha [R_{t+1} + \gamma V(S_{t+1}) - V(S_t)] $$
+
+
 ![[Pasted image 20231025210511.png]]
 
 

@@ -7,13 +7,13 @@
 * 우선 lr는 감가된 모든 reward에 대해서 최대값을 찾는 것으로 정의 한다.
 $$ v_{\pi}(s) = E_{\pi}[R_{t+1} + {\gamma}R_{t+2} + {\gamma}^2R_{t+2}+ ... | S_t=s]  $$
 
->[!policy-based]
+>[!summary]
 > ### Policy-Based method
 >![[스크린샷 2023-10-24 오후 11.20.52.png]]
 > Policy-Based method에서 중요한 점은 **직접적으로 policy에 대해서 훈련한다는 것이다.**
 > 예를 들어 특정 state에 대해서 action을 선택하고 해당 action이 얼마나 유효한지를 판단하는 것
 
-> [!value-Based]
+> [!summary]
 > ### Value-Based method
 > ![[스크린샷 2023-10-24 오후 11.20.29.png]]
 > policy-Based와는 다르게 간접적으로 value를 평가할 수 있는 방법을 학습시키는 것이다.
@@ -26,7 +26,7 @@ $$ v_{\pi}(s) = E_{\pi}[R_{t+1} + {\gamma}R_{t+2} + {\gamma}^2R_{t+2}+ ... | S_t
 
 --- 
 
->[!state-value function]
+>[!summary]
 >### state-value function
 >state-value function은 아래와 같이 정의된다.
 >$$\Huge V_{\pi}(s) = E_{\pi}[G_t|S_t=s] $$
@@ -37,7 +37,7 @@ $$ v_{\pi}(s) = E_{\pi}[R_{t+1} + {\gamma}R_{t+2} + {\gamma}^2R_{t+2}+ ... | S_t
 >그림을 보면 간단한데 생쥐가 첫번째 칸에 이동 했을 때 목적지까지 얼마나 떨어져있는지를 수치적으로 계산한 것이다.
 >
 
->[!action-value function]
+>[!summary]
 >### action-value function
 >action-value function은 아래와 같이 정의된다.
 >$$\Huge Q_{\pi}(s,a) = E_{\pi}[G_t|S_t = s, A_t = a] $$

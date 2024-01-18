@@ -110,3 +110,41 @@ for i in range(1,10):
 
 # 과제
 ![[Notes_240111_195936.pdf]]
+
+## Answer
+
+```python
+class Node:
+  def __init__(self, value):
+    self.value = value
+    self.head = None
+    self.tail = None
+  
+  def iterloop(self):
+    ret_str = str(self.value) + " -> "
+    reverse_flag = False
+    iterNode = self.tail
+    while True:
+      if  iterNode.head == None:
+        ret_str += str(iterNode.value)
+        break
+      ret_str += str(iterNode.value) + " -> "
+      if iterNode.tail == None:
+        iterNode = iterNode.head
+        reverse_flag = not reverse_flag
+      elif not reverse_flag:
+        iterNode = iterNode.tail
+      elif reverse_flag:
+        iterNode = iterNode.head
+    print(ret_str)
+
+rootNode = Node(0)
+
+for i in range(1,10):
+  addNode = Node(i)
+  addNode.tail = rootNode
+  rootNode.head = addNode
+  rootNode = addNode
+  
+
+rootNode.iterloop()```

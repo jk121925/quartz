@@ -114,37 +114,56 @@ for i in range(1,10):
 ## Answer
 
 ```python
-class Node:
+cclass Node:
   def __init__(self, value):
     self.value = value
-    self.head = None
-    self.tail = None
-  
-  def iterloop(self):
-    ret_str = str(self.value) + " -> "
-    reverse_flag = False
-    iterNode = self.tail
+    self.up = None
+    self.down = None
+    self.left = None
+    self.right = None
+
+  def iter(self):
+    iterNode = self
+    rightflag = True
+    ret_str = ""
     while True:
-      if  iterNode.head == None:
-        ret_str += str(iterNode.value)
+      ret_str += str(iterNode.value) + " "
+      if iterNode.right !=None and rightflag:
+        iterNode = iterNode.right
+      elif iterNode.left !=None and not rightflag:
+        iterNode = iterNode.left
+      elif iterNode.right == None and iterNode.down !=None:
+        iterNode = iterNode.down
+        rightflag = False
+      elif iterNode.left == None and iterNode.down !=None:
+        iterNode = iterNode.down
+        rightflag =True
+      elif iterNode.right == None and iterNode.down == None:
         break
-      ret_str += str(iterNode.value) + " -> "
-      if iterNode.tail == None:
-        iterNode = iterNode.head
-        reverse_flag = not reverse_flag
-      elif not reverse_flag:
-        iterNode = iterNode.tail
-      elif reverse_flag:
-        iterNode = iterNode.head
-    print(ret_str)
+    return ret_str
 
-rootNode = Node(0)
-
-for i in range(1,10):
+oneNode = Node(1)
+leftTop = oneNode
+rightiter = oneNode
+for i in range(2,26):
   addNode = Node(i)
-  addNode.tail = rootNode
-  rootNode.head = addNode
-  rootNode = addNode
-  
-
-rootNode.iterloop()```
+  if i % 5 == 1:
+    addNode.up = leftTop
+    leftTop.down = addNode
+    leftTop = addNode
+    rightiter = addNode
+  elif rightiter.value <5:
+      rightiter.right = addNode
+      addNode.left = rightiter
+      rightiter = addNode
+  elif rightiter == 5:
+    rightiter.right =addNode
+    addNode.left = rightiter
+    rightiter = addNode
+  else:
+    rightiter.right = addNode
+    addNode.left = rightiter
+    addNode.up = rightiter.up.right
+    addNode.up.down = addNode
+    rightiter = addNode
+print(oneNode.iter())```

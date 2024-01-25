@@ -238,3 +238,55 @@ vertical 5
 ### HOW MANY RECTANGLE DO YOU FILL?
 
 결과는 갯수만 알려주면 굳!
+
+### Answer
+```python
+import numpy as np
+class Rectangle:
+  def __init__(self,value, w,h):
+    self.value = value
+    self.location = [w,h]
+    
+
+def checkBoard(startPoint,endPoint):
+  checkValue = board[startPoint[0]:endPoint[0], startPoint[1]:endPoint[1]].ravel()
+  TF = lambda checkValue : np.all(checkValue == 0)
+  return TF(checkValue)
+
+def fillBoard(startPoint, endPoint,value):
+  board[startPoint[0]:endPoint[0], startPoint[1]:endPoint[1]] = value
+
+
+board = np.zeros((3,3), dtype=int)
+ans = 0
+
+rectangles = [Rectangle(1,1,1), Rectangle(2,1,1), Rectangle(3,1,2), Rectangle(4,1,2), Rectangle(5,1,3)]
+use = [False for _ in range(5)]
+
+def bruteForce(nowPoint):
+  global ans,board
+  if nowPoint==5:
+    ans+=1
+    print("ans-"*5)
+    print(board)
+    print("-ans"*5)
+    return
+
+  for i in range(3):
+    for j in range(3):
+      if board[i][j] == 0:
+        for index,rec in enumerate(rectangles) :
+          if  not use[index] and i+ rec.location[0] <4 and j+rec.location[1] <4 and checkBoard([i,j],[i+rec.location[0], j+rec.location[1]]):
+            use[index] = True
+            fillBoard([i,j],[i+rec.location[0], j+ rec.location[1]],rec.value)
+            bruteForce(nowPoint+1)
+            fillBoard([i,j],[i+rec.location[0], j+ rec.location[1]],0)
+            use[index] = False
+          if rec.location[0] != rec.location[1] and not use[index] and i+ rec.location[1] <4 and j+rec.location[0] <4 and checkBoard([i,j],[i+rec.location[1],j+rec.location[0]]):
+            use[index] = True
+            fillBoard([i,j],[i+rec.location[1],j+rec.location[0]],rec.value)
+            bruteForce(nowPoint+1)
+            fillBoard([i,j],[i+rec.location[1],j+rec.location[0]],0)
+            use[index] = False
+
+bruteForce(0)```

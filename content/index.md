@@ -1,3 +1,19 @@
 # 이름 : 이종근
 
-# 경력 : SAMOO 종합 건축사 사무소 Software Engineer
+## 교육
+### 학력 : 연세대학교 건축공학과 건축학 전공
+### 활동 
+* #### YAI 연세대학교 인공지능 동아리
+* #### Ybigta 연세대학교 빅데이터 동아리
+* #### Form 연세대학교 건축공학과 디자인 동아리
+* #### Band Asibi 연세대학교 건축공학과 밴드
+
+### 경력
+#### OBBA (건축사사무소) : 인턴 (3D Designer)
+#### Savills Korea : Researcher
+#### YA studio : 3D renderer
+#### O&B : Manger
+#### BrokenWrist : PM & 3D Designer
+
+
+#### 현재 :SAMOO 종합 건축사 사무소 Software Engineer

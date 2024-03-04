@@ -9,11 +9,13 @@
 * #### Band Asibi 연세대학교 건축공학과 밴드
 
 ### 경력
-#### OBBA (건축사사무소) : 인턴 (3D Designer)
-#### Savills Korea : Researcher
-#### YA studio : 3D renderer
-#### O&B : Manger
-#### BrokenWrist : PM & 3D Designer
-
+* #### OBBA (건축사사무소) : 인턴 (3D Designer)
+* #### Savills Korea : Researcher
+	* 데이터 센터 CAP Rate Researching & Database 구축
+* #### YA studio : 3D renderer
+	* V-ray Rendering Partner
+* ##### O&B : Manger
+	* House Manager
+* #### BrokenWrist : PM & 3D Designer
 
 #### 현재 :SAMOO 종합 건축사 사무소 Software Engineer

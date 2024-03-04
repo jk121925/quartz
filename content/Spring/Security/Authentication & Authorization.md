@@ -1,0 +1,118 @@
+### SecurityContextHolder & Authentication(인증) Authorization(인가)
+
+1. Authentication
+    
+    ```java
+    public interface Authentication extends Principal, Serializable {
+    
+    	Collection<? extends GrantedAuthority> getAuthorities();
+    
+    	Object getCredentials();
+    	
+    	Object getDetails();
+    
+    	Object getPrincipal();
+    
+    	boolean isAuthenticated();
+    
+    	void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException;
+    
+    }
+    ```
+    
+    이 객체는 저번시간에 설명을 하지 않았네요… 
+    
+    해당 객체는 인터페이스로 구성되어 있으면서 Serializable과 Principal을 상속받아서 구현을 진행합니다.
+    
+    여기서 Principal은 이전 시간에 UserDetailsService에서 리턴한 객체입니다.
+    ![[Untitled.png|center]]
+    
+    콘솔에서 디버거를 통해서 Authentication을 찍어보면 여러 객체를 가지고 있는 것을 볼 수 있는데, 여기서 principal이 찍히는 것을 확인해 볼 수 있다. **즉 Authentication은 인증된 정보를 가지고 있을 수 있는 객체라고 이해할 수 있다. 또한 명시적으로 로그아웃하기 전까지는 Session에서 유지되는 것을 알고 있어야한다.**
+    
+     
+    
+    > Princial → User 객체, authroity → 어떤 권한을 가지고 이
+    
+    
+    
+    1. SecurityContextHolder
+    
+    SecurityContextHolder는 응용 프로그램의 현재 보안 컨텍스트에 대한 세부정보가 저장된다. → 이게 뭔말인고 하니 **tomcat에 request가 들어와서 TCP연결을 진행할 때, 로그일을 하게 되면 해당 정보를 Context에 등록하고 재사용할 수 있도록 만들어 주는 것! 이라고 생각하면된다.**
+    
+    여기 여러개의 전략이 존재하는데 기본적으로 **ThreadLocal**이라는 개념을 사용한다.
+    
+    ![[Untitled 1.png]]
+    
+    <aside>
+    💡 실제로 코드를 까보면 MODE_{stratgy}라고 나온다. 여기서 여러개의 전략이 존재하는데 ThreadLocal에 대해서 설명을 한번 해보자
+    
+    우리스터디는 운영체제는 다들은 늙은이들이므로 Thread과제는 한번씩 다해 봤을 꺼다.
+    
+    Thread는 리눅스에서 경량 process로 공통된 자원을 공유한다. → 이말은 내가 변경하면 남도 변경되서 사용할 수 있다는 이야기가 된다.
+    
+    위에서 request가 받아져서 TCP연결이 진행되면 Thread가 생성이 되서 client와 연결을 하게 된다. → 이때 연결을 맺은 1개의 (혹은 N개) Thread는 자원을 공유하게 됨으로 Security에서는 로그인 즉 인증정보를 공유하는 것이다.
+    
+    **이 때 SecurityContextHolder에서는 최초 Thread가 생성될 때 Thread내에서만 자원을 공유 할 것인지, Global하게 자원을 공유할 것인지 이런것을 결정한다.**
+    
+    **또한 어떤 과정에 의해서 인증이 완료가 되면 UserDetail로 만들어진 객체인 Principal을 받아서 SecurityContext에 저장하는 역할도 한다.**
+    
+    </aside>
+    
+    ### AuthenticationManager와 Authentication
+    
+    - Authentication은 (인증은) AuthenticationManager가 진행한다.
+    - 만약 인증이 유효하다면 Authentication 객체를 리턴한다.
+    - ProviderManager 이 구현체에서 실제 인증을 진행한다.
+        - 인증을 진행할 수 있는 provider를 찾는다. (현재 form login에서는 DaoAuthenticationProvider를 호출한다. AbstractAuthenticationProcessingFilter)
+        - 이후 우리가 구현한 UserService에 UserDetailsService를 통해서 DB에서 객체를 가져와서 인증을 진행하고
+        - 외부로 노출 될 수 있는 Credential 비밀번호를 지운뒤
+        - Session에 해당 Principal을 저장하고 인증을 했다고 끝낸다. (뒤지게 길다…)
+    
+    ProviderManager에서 중단점을 걸어서 확인을 해본다.
+    ![[Untitled 2.png]]
+    
+    인증의 시작… → ProviderManager로 들어와서 Authentication을 리턴하는 authenticate를 실행
+    ![[Untitled 3.png]]
+    
+    **현재 Form로그인은 UsernamePasswordAuthenticationToken를 가지고 인증을 진행해야 하지만 Provider는 AnonymousAuthenticationProvider로 인증을 할 수 없다.**
+    ![[Untitled 4.png]]
+    
+    그래 밑으로 내려가면 엄마를 부른다. → (엄마 나 못하겠어 도와줘…) ㅋㅋㅋㅋ
+    ![[Untitled 5.png]]
+    
+    부모의 authentication을 호출하면 provider가 DaoAuthenticationProvider로 변경이 되면서 인증을 진행 할 수 있게 된다.
+    ![[Untitled 6.png]]
+    
+    계속 authenticate을 따라가면 user를 로드하기 위해서 retrieveUser를 call하게 된다.
+    ![[Untitled 7.png]]
+    
+    그렇다면 드디어 우리가 구현 했던 UserDetailsService에 (이것도 의존성주입을 해줬지~) loadUserByUsername을 실행하면서 DB에서 repositroy를 통해서 메모리에 객체를 올려주고 이후에 인증을 진행하게 되는 것이다!
+    ![[Untitled 8.png]]
+    
+    이후 캐싱을 거쳐 비밀번호도 지우고 세션에 등록을 시켜준다.
+    ![[Untitled 9.png]]
+    
+    이후 많은 Filter를 거치게 되고 로그인 할 수 있게 되는 것이다. 후…
+    ![[Untitled 10.png]]
+    
+    success 객체 찾기도 더럽게 힘드네.
+    
+    ### FilterChainProxy
+    
+    저번주에도 언급 했지만 결국 Security는 Filter로 전부 구현을 한것이다. 이를 증명하기 위해서 FilterChainProxy를 까보자.
+    
+    ![[Untitled 11.png]]
+    
+    기본적으로는 doFilterInternal을 통해서 filtering을 진행하는데 중간에 중단점을 걸어 보면 filter가 14개나 됨을 알 수 있다. 
+    ![[Untitled 12.png]]
+    
+    
+    해당 강의에서는 자세하게 다루지 않지만 결국 중요한 것은 필터를 이용해서 인증을 진행하고 있다는 것!
+    
+    그렇다면?! Filter는 뭘로 부터 생성되는 것일까?!
+    ![[Untitled 13.png]]
+    
+    라고 물어 보면 정답은 우리가 만들어둔 설정인 SecurityFilterChain에서의 antMatchers에 따라서 filter의 갯수가 달라지게 된다. ok?
+    ![[Untitled 14.png|center]]
+    
+    마지막으로 DelegatingFilterProxy입니다. 이 객체는 Servlet Filter에서 Security Filter로 연결해주는 Adapter같은 역할을 진행합니다~. 오늘은 여기까지…

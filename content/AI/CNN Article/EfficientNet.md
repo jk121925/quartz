@@ -35,7 +35,7 @@
 
 - problem formulation
     
-    ![[Untitled 4.png]]
+    ![[EfficientNet.png]]
     
     문제를 정의하기 위해서는 우선 위의 수식을 이해해야한다.
     
@@ -44,7 +44,7 @@
     여기까지 오면 이해를 하나 해야되는 것은 차원이 줄어들 수록 H,W가 줄어들 수록 C가 늘어난 다는 점을 이해하고 보자.
     
     이전 모델들에서는 best Architecture 즉 최적의 operate function을 찾는데 집중했다면 해당 모델은 function은 내버려 두고 Network의 deep (L)과 H,W을 기준으로 모델의 baseline을 잡아준다. 그리고 해당 모델이 굉장히 차원이 큰 상황에도 적용할 수 있게 하려면 어떤 scaling factor를 정해 놓아야 한다고 말한다. 이러한 scaling factor는 각 d,w,r로 표현되며 최대 정확성을 3개의 파라미터로 나타내는 식이 될 수 있다.
-    ![[Untitled 1 1.png]]
+    ![[EfficientNet1.png]]
     
     
 - Scaling dimensions
@@ -64,11 +64,9 @@
         이미지의 크기는 해상도가 높을 수록 크기가 클수록 더 좋은 정확성을 내지만 크기가 클수록 채널수가 많아지는 단점이 있어 이를 확인해야한다.
         
 - Compound Scaling
+    ![[EfficientNet-1.png]]
     
-    ![[Untitled 2 1.png]]
-    
-    이 절에서 이야기 하고 싶었던 것은 결국 세개의 parameter를 적절하게 조합할 수 있어야 더 좋은 성능을 낼 수 있다는 이야기를 하고 싶은 것이다. 같은 width일 때 d와 r을 적절하게 조합할 수 있다면 더욱 좋은 정확성을 낼 수 있다는 이야기를 한다.
-    ![[Untitled 3 1.png]]
+    이 절에서 이야기 하고 싶었던 것은 결국 세개의 parameter를 적절하게 조합할 수 있어야 더 좋은 성능을 낼 수 있다는 이야기를 하고 싶은 것이다. 같은 width일 때 d와 r을 적절하게 조합할 수 있다면 더욱 좋은 정확성을 낼 수 있다는 이야기를 한다.![[EfficientNet-2.png]]
     
     결과적으로는 이러한 세개의 파라미터를 튜닝하는 한가지 factor를 제시하게 된다. 보이는 것처럼 a * b^2 * r^2값이 근사 2가 되게 만들고 각각의 값은 1보다 크며 이를 만족하는 pi값중에서 최적의 값을 잡아내는 것을 목표로한다. 
     
@@ -77,7 +75,7 @@
     근사 2가 되게하는 이유는 FLOPS에서 2배로 뭔가 커지면 4배의 연산량이 사용되야 하기 때문에 이를 제한하기 위해서 2를 사용한 것으로 보인다.
     
     ### EfficientNet Architecture
-    ![[Untitled 4 1.png]]
+    ![[EfficientNet-3.png]]
     
     
     해당절에서 가장이야기 하고 싶었던 부분은 FLOPS를 특정값에 맞추지 않고 연산을 진행해도 효율적인 base line을 만들어야 한다는 것이 이야기하는 것 같다.

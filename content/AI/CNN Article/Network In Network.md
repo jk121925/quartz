@@ -10,8 +10,7 @@
     
     내가 생각하는 추상화란 linear하게 딱딱 나눠지는 것이 아니라 인간이 사고하는 것과 비슷한 느낌으로 분류 기준을 좀 더 일반화하는 개념을 의미하는 것
     
-
-![[Untitled 5.png]]
+![[Network In Network-1.png]]
 
 이에 본 논문은 NIN이라는 모델을 제시하고 GLM을 비선형 함수인 micro network로 대체한다. 이는 역전파로 훈련이 가능하고 Multilayer Perceptron으로 구성되어있다.
 
@@ -85,7 +84,7 @@
     1. MLP는 역전파로 훈련된 CNN과 양립이 가능하다.
     2. MLP는 feature를 새사용하는 심층 모델 일 수 있다.
     
-    ![[Untitled 1 2.png]]
+    ![[Network In Network-2.png]]
     
     위의 수식이 mlpconv layer의 계산 과정인데 relu를 사용한 것이다.
     

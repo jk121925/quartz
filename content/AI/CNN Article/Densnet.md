@@ -62,8 +62,7 @@
 최초의 단일 이미지인 x0가 존재하고 레이어는 L개의 레이어를 이용한다. 이후 non-linear transformation Hl(.)를 이용하는데 이는 batch normalization → ReLU → Conv.로 구성이 되어있다.
 
 - Dense connectiviyt는 아래와 같은 수식을 가진다.
-
-![[Untitled.png]]
+![[Densnet-4.png]]
 
 해당 수직은 l번째 레이어에 feature를 만들기 위해서 이전에 모든 레이어에 transformation을 취한다는 이야기를 한다. 이를 통해서 이전에 존재하는 feature를 잡아올 수 있다,
 
@@ -114,8 +113,10 @@ Following [8], we use a weight decay of 10−4 and a Nesterov momentum [35] of 0
 </aside>
 
 ### Result
-![[Untitled 1.png]]
-![[Untitled 2.png]]
+
+![[Densnet-1.png]]
+![[Densnet-2.png]]
+
 
 ### Discussion
 
@@ -130,8 +131,7 @@ Following [8], we use a weight decay of 10−4 and a Nesterov momentum [35] of 0
 - Stochastic vs Deterministic connection.
 
 - Feature reuse
-
-![[Untitled 3.png]]
+![[Densnet-3.png]]
 
 해당 그래프는 블록내에서 각 레이어들의 평균가중치를 나타낸 것을 볼 수 있는데 l,s의 레이어는 이전 레이어의 정보를 비슷하게 이용하는 것을 보여줄 수 있다.
 

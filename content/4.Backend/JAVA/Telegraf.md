@@ -1,0 +1,3 @@
+```
+telegraf --config ./telegraf.conf
+```

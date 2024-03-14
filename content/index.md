@@ -7,7 +7,7 @@
 ### 활동 
 * #### YAI 연세대학교 인공지능 동아리
 * #### Ybigta 연세대학교 빅데이터 동아리
-	* [[1. Overview&IDEA|AWS HW monitoring]] : AWS EC2 리소스 모니터링 Project
+	* [[5.Project/AWS HW monitoring/1. Overview & IDEA|AWS HW monitoring]] : AWS EC2 리소스 모니터링 Project
 * #### Form 연세대학교 건축공학과 디자인 동아리
 * #### Band Asibi 연세대학교 건축공학과 밴드
 

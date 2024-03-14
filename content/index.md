@@ -17,7 +17,7 @@
 	* 데이터 센터 CAP Rate Researching & Database 구축
 * ###### YA studio : 3D renderer
 	* V-ray Rendering Partner
-* ####### O&B : Manger
+* ###### O&B : Manger
 	* House Manager
 * ###### BrokenWrist : PM & 3D Designer
 * #### 현재 삼우 종합 건축사 사무소 

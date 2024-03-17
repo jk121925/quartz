@@ -3,21 +3,42 @@
 # 이름 : 이종근
 
 ## 교육
-### 학력 : 연세대학교 건축공학과 건축학 전공
-### 활동 
-* #### YAI 연세대학교 인공지능 동아리
-* #### Ybigta 연세대학교 빅데이터 동아리
-	* [[1. Overview & IDEA - HW monitoring|AWS HW monitoring]] : AWS EC2 리소스 모니터링 Project
-* #### Form 연세대학교 건축공학과 디자인 동아리
-* #### Band Asibi 연세대학교 건축공학과 밴드
+##### 학력 : 연세대학교 건축공학과 건축학 전공
+##### 학력 : 연세대학교 컴퓨터 과학과 마이크로전공
 
-### 경력
+### 주요 프로젝트 
+##### [[0. AWS HW monitoring Project|AWS EC2 리소스 모니터링 Project]]
+
+AWS에 EC2 instance의 하드웨어 리소스를 실시간으로 모니터링 하기 위해서 만들어진 프로젝트입니다.
+cloud에 이상이 생길 경우를 대비해 실시간 리소스 사용량을 시각화하는 프로그램을 구성했으며 이를 통해 리소스의 사용량이 평균에 비해 급격하게 증가하는 경우에 그래프에서 알림을 줄수 있도록 구성했습니다.
+
+![[6. Visualization-13.gif|700]]
+
+##### [[0. TFIDF PPT Searching Project|| TFIDF를 통한 PPT 추천 Project]]
+
+데이터 베이스에 가공되어 있지 않은 상태의 파워포인트 파일의 추천 시스템 개발을 위한 프로젝트입니다. 많은양의 데이터와 이를 검색하는 시스템이 데이터베이스에 저장된 이후 방치되고 있었고 이러한 기간이 늘어나 더이상 유의미한 검색을 할 수 없게된 프로그램을 개선하기 위한 첫 프로젝트였습니다.
+
+프로젝트를 진행하며 다양한 문제상황에 대해 기획, 구현을 진행했고 아래 그래프들을 결과로 확인할 수 있습니다.
+
+> * 데이터 추출 시간 감소
+> * Threading을 통한 ppt 추출 시간 단축 그래프
+> ![[4. Threading with PPT-4.png|500]]
+> * 문서군의 크기에 따른 TF-IDF 가중치 추출
+> ![[3. TF-IDF with PPT-1.png|500]]
+> * 협력사 문서군 크기에 따른 TF-IDF 가중치 추출
+> * ![[3. TF-IDF with PPT-2.png|500]]
+
+### 기타 활동
+
+* ###### Ybigta 연세대학교 빅데이터 학회
+* ###### YAI 연세대학교 인공지능 학회
+* ###### Form 연세대학교 건축공학과 디자인 학회
+* ###### Band Asibi 연세대학교 건축공학과 밴드
 * ###### OBBA (건축사사무소) : 인턴 (3D Designer)
-* ###### Savills Korea : Researcher
-	* 데이터 센터 CAP Rate Researching & Database 구축
-* ###### YA studio : 3D renderer
+* ###### Savills Korea : 인턴 Data Center Researcher
+* ###### YA studio : 작업실 구성원 3D renderer
 	* V-ray Rendering Partner
 * ###### O&B : Manger
 	* House Manager
 * ###### BrokenWrist : PM & 3D Designer
-* #### 현재 삼우 종합 건축사 사무소 
+* ###### 삼우 종합 건축사 사무소 : 인턴

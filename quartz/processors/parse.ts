@@ -83,7 +83,7 @@ export function createFileParser(ctx: BuildCtx, fps: FilePath[]) {
       try {
         const perf = new PerfTimer()
         const file = await read(fp)
-
+        
         // strip leading and trailing whitespace
         file.value = file.value.toString().trim()
 
@@ -91,17 +91,23 @@ export function createFileParser(ctx: BuildCtx, fps: FilePath[]) {
         for (const plugin of cfg.plugins.transformers.filter((p) => p.textTransform)) {
           file.value = plugin.textTransform!(ctx, file.value)
         }
-
+        
         // base data properties that plugins may use
         file.data.slug = slugifyFilePath(path.posix.relative(argv.directory, file.path) as FilePath)
         file.data.filePath = fp
-
+        console.log(file)
         const ast = processor.parse(file)
+        console.log("------------ast-----------")
+        console.log(ast.children[0])
+        console.log(ast.children[1])
+        console.log("------------ast-----------")
         const newAst = await processor.run(ast, file)
         res.push([newAst, file])
-
+        
         if (argv.verbose) {
-          console.log(`[process] ${fp} -> ${file.data.slug} (${perf.timeSince()})`)
+          console.log(`IN create file parser [process] ${fp} -> ${file.data.slug} (${perf.timeSince()})`)
+          // console.log(file.data)
+          // console.log(`[process] ${fp} -> ${file.data.slug} (${perf.timeSince()})`)
         }
       } catch (err) {
         trace(`\nFailed to process \`${fp}\``, err as Error)
